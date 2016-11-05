@@ -2,39 +2,38 @@ function run () {
 var pathToFile;
 var numOfFiles = document.getElementById('numOfFiles').value;
 console.log('numOfFIle: ', numOfFiles);
-for (i = 1; i <= numOfFiles; i++) {
+for (i = 0; i < numOfFiles; i++) {
   pathToFile = 'input/' + i + '_.mid';
   console.log(pathToFile);
   // read the notes from the midi file
+  var str = '';
   MidiConvert.load(pathToFile, function(midiData) {
     var notesData;
-    var str = '';
 
     var numOfTracks = midiData.tracks.length;
     console.log("numOfTracks: ", numOfTracks)
 
     var startTime, duration, pitch, velocity;
     // loop through all tracks
-    for (i = 0; i < numOfTracks; i++) {
-      notesData = midiData.tracks[i].notes;
+    for (j = 0; j < numOfTracks; j++) {
+      notesData = midiData.tracks[j].notes;
       if (notesData) {
-        for (j = 0; j < notesData.length; j++) {
+        for (k = 0; k < notesData.length; k++) {
           // nr.notes.push(new Note(notesData[j].midi - 21, notesData[j].time, notesData[j].duration));
           // console.log(notesData[j]);
-          startTime = Math.floor(notesData[j].time * 100);
-          duration = Math.floor(notesData[j].duration * 100);
-          pitch = notesData[j].midi;
-          velocity = notesData[j].velocity;
+          startTime = Math.floor(notesData[k].time * 100);
+          duration = Math.floor(notesData[k].duration * 100);
+          pitch = notesData[k].midi;
+          velocity = notesData[k].velocity;
 
           str +=  startTime + ' ' + duration + ' ' + pitch + ' ' + velocity + '\n';
         }
       }
     }
-
-    console.log(str);
-    console.log('downloading');
-    download('out.txt', str);
   });
+  console.log(str);
+  console.log('downloading');
+  download('out_' + i + '.txt', str);
 }
 
 function download(filename, text) {

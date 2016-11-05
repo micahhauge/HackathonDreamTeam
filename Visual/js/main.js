@@ -1,14 +1,16 @@
 console.log('main.js loaded');
-var pathToFile = 'midi/7years.mid'
-// var pathToFile = 'midi/JosiahMIDI.mid'
+// var pathToFile = 'midi/7years.mid'
+var pathToFile = 'midi/JosiahMIDI.mid'
 
 nr = new NoteRoll();
 
 // usage: addNote(pitch, startTime, duration);
 // nr.addNote(0, 0, .1);
-// nr.addNote(1, 1, 1);
-// nr.addNote(5, 12, 2);
-nr.addNote(0, 0, .1);
+// nr.addNote(0, 1, 1);
+// nr.addNote(2, 2, 2);
+// // nr.addNote(0, 0, .1);
+// nr.renderNotes();
+// nr.timeline.play();
 getNotesFromMidi();
 
 function getNotesFromMidi() {

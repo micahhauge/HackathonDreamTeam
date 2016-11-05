@@ -1,6 +1,8 @@
-console.log('main.js loaded');
+// console.log('main.js loaded');
 // var pathToFile = 'midi/7years.mid'
 var pathToFile = 'midi/JosiahMIDI.mid'
+// var pathToFile = 'midi/lamb.mid'
+// TweenMax.defaultEase = Linear.easeNone;
 
 nr = new NoteRoll();
 
@@ -17,6 +19,7 @@ function getNotesFromMidi() {
   // read the notes from the midi file
   MidiConvert.load(pathToFile, function(midiData) {
     var numOfTracks = midiData.tracks.length;
+    console.log(midiData);
 
     // loop through all tracks
     for (i = 0; i < numOfTracks; i++) {

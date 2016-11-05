@@ -19,8 +19,31 @@ function NoteRoll () {
     this.notes.push(new Note(pitch, startTime, duration, this.properties));
   }
 
+  // function to sort the notes based on startTime
+  this.sortNotes = function () {
+    var len = this.notes.length;
+    var min;
+    for (i = 0; i < len; i++) {
+      // set minimum to this position
+      min = i;
+
+      // check the rest of the array to see if there is anythin smaller
+      for (j = i+1; j < len; j++) {
+        if(this.notes[j].startTime < this.notes[min].startTime) {
+          min = j;
+        }
+      }
+
+      // if the minimum isn't the position, swap it
+      if (i != min) {
+        swap(this.notes, i, min);
+      }
+    }
+  }
+
   // function to render notes
   this.renderNotes = function () {
+    this.sortNotes();
     // get the last note in the notes array
     var lastNote = this.notes[this.notes.length - 1];
     var endTime = lastNote.startTime + lastNote.duration;
@@ -30,8 +53,8 @@ function NoteRoll () {
     console.log('End Time: ' + endTime);
     console.log('End px: ' + endPos);
 
-    bar(0, this.properties);
-    bar(endTime, this.properties);
+    bar(0, this.properties, 'stop');
+    bar(endTime, this.properties, 'start');
 
     this.properties.lastNote = this.notes[this.notes.length - 1];
     this.properties.firstNote = this.notes[0];
@@ -49,7 +72,7 @@ function NoteRoll () {
       }
       length = this.properties.yScale * this.notes[i].duration;
       xPos = (pitchToXPos[this.notes[i].pitch] * this.properties.noteWidth) + xOffset;
-      yPos = endPos - (this.notes[i].startTime * this.properties.yScale) - length;
+      yPos = endPos - (this.notes[i].startTime * this.properties.yScale) - length + window.innerHeight;
       nWidth = this.properties.noteWidth * scale;
       // console.log('yPos: ', yPos);
       // console.log('xPos: ', xPos);
@@ -65,8 +88,7 @@ function NoteRoll () {
 
     console.log('done!');
     this.properties.endPos = endPos;
-    this.properties.endTime = endTime;
-    this.timeline = createTimeline(this.notes, this.properties);
+    this.properties.endTime = endTime; this.timeline = createTimeline(this.notes, this.properties);
     // TweenMax.to(window, 0, {scrollTo: endPos});
     // TweenMax.to(window, endTime, {scrollTo: 0});
 
@@ -99,10 +121,11 @@ function Note (pitch, startTime, duration, p) {
 /** Definition of Note class
  * TODO: add a description of the class here
  */
-function bar (time, p) {
+function bar (time, p, id = "") {
   // create graphic
   this.graphic = document.createElement('div');
   this.graphic.className = 'bar';
+  this.graphic.id = id;
 
   // add it to the body
   document.body.appendChild(this.graphic);
@@ -118,19 +141,20 @@ function bar (time, p) {
 // function to add notes in NoteRoll to the DOM in their correct position;
 // create the graphic for the note
 function createTimeline(notes, p) {
-  TweenLite.defaultEase = Linear.easeNone;
+  console.log(notes);
+  TweenMax.defaultEase = Linear.easeNone;
+
   tl = new TimelineMax({paused:true});
-  tl.to(window, 0, {scrollTo: p.lastNote.startTime * p.yScale});
-  console.log('start: ' + p.firstNote.startTime + ' fin: ' + p.lastNote.startTime);
-  tl.to(window, p.lastNote.startTime - p.noteSpeed * .5, {scrollTo: 0}, 0);
 
 
   for (var i = 0; i < notes.length; i++) {
     tl.to(notes[i].graphic, .1, {
       backgroundColor: '#00eeff'
-    }, notes[i].startTime);
+    }, notes[i].startTime - p.firstNote.startTime);
   }
 
+  tl.to(window, 0, {scrollTo: "#start"}, 0);
+  tl.to(window, p.endTime, {scrollTo: "#stop", ease: Linear.easeNone}, 0);
   // tl.to(body)
   return tl;
 
@@ -156,7 +180,7 @@ function getProperties () {
   // p.noteWidth = p.viewWidth / 88;
 
   // the time in seconds that it will take a note to cross the sceen
-  p.noteSpeed = 4;
+  p.noteSpeed = 3;
 
   // yScale is the number of vertical pixels that represent 1 second in game
   // so if a note is 3 seconds long, it's vertical height will be 3 * yScale pixels
@@ -173,4 +197,11 @@ function isBlack(pitch) {
  } else {
    return false;
  }
+}
+
+// function to swap two items
+function swap(items, firstIndex, secondIndex) {
+  var temp = items[firstIndex];
+  items[firstIndex] = items[secondIndex];
+  items[secondIndex] = temp;
 }

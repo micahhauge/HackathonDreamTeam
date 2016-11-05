@@ -9,11 +9,11 @@ body {
   font-size:18px;
 }
 
-.bar = {
-  height: 10px;
-  width: 1000px;
-  background-color: 'white';
+#start {
+  /*background-color: green;*/
 }
+
+
 
 
 .note {
@@ -28,5 +28,5 @@ body {
   position: absolute;
   height: 5px;
   width: 100%;
-  background-color: grey;
+  background-color: black;
 }

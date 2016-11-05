@@ -1,0 +1,25 @@
+/* Global styles come from external css http://codepen.io/GreenSock/pen/JGaKdQ*/
+body {
+  margin:0;
+  /*overflow: hidden;*/
+  background-color: #1a1a1a;
+  font-family: Signika Negative, sans-serif;
+  color:#989898;
+  margin:0px;
+  font-size:18px;
+}
+
+.bar = {
+  height: 10px;
+  width: 1000px;
+  background-color: 'white';
+}
+
+
+.note {
+  border-radius: 7px;
+  position: absolute;
+  height: 100px;
+  width: 20px;
+  background-color: white;
+}

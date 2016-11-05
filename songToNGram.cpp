@@ -9,7 +9,7 @@
 using namespace std;
 
 // last file in training data
-const int LAST_FILE_INDEX = 1; // 26 Mendelson files
+const int LAST_FILE_INDEX = 4; // 26 Mendelson files
 
 struct Note{
 	float duration;

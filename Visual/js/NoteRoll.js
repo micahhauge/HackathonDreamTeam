@@ -30,6 +30,9 @@ function NoteRoll () {
     console.log('End Time: ' + endTime);
     console.log('End px: ' + endPos);
 
+    bar(0, this.properties);
+    bar(endTime, this.properties);
+
     this.properties.lastNote = this.notes[this.notes.length - 1];
     this.properties.firstNote = this.notes[0];
 
@@ -93,6 +96,24 @@ function Note (pitch, startTime, duration, p) {
 
 }
 
+/** Definition of Note class
+ * TODO: add a description of the class here
+ */
+function bar (time, p) {
+  // create graphic
+  this.graphic = document.createElement('div');
+  this.graphic.className = 'bar';
+
+  // add it to the body
+  document.body.appendChild(this.graphic);
+  TweenMax.set(this.graphic, {
+    y: time * p.yScale,
+  });
+
+  return this;
+
+}
+
 
 // function to add notes in NoteRoll to the DOM in their correct position;
 // create the graphic for the note
@@ -101,7 +122,7 @@ function createTimeline(notes, p) {
   tl = new TimelineMax({paused:true});
   tl.to(window, 0, {scrollTo: p.lastNote.startTime * p.yScale});
   console.log('start: ' + p.firstNote.startTime + ' fin: ' + p.lastNote.startTime);
-  tl.to(window, p.lastNote.startTime - p.firstNote.startTime, {scrollTo: p.firstNote.startTime * p.yScale}, 0);
+  tl.to(window, p.lastNote.startTime - p.noteSpeed * .5, {scrollTo: 0}, 0);
 
 
   for (var i = 0; i < notes.length; i++) {

@@ -23,3 +23,10 @@ body {
   width: 20px;
   background-color: white;
 }
+
+.bar {
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background-color: grey;
+}

@@ -34,7 +34,7 @@ int main(){
 		songMap[temp.start].push_back(temp);
 	} // end of while
 
-	map<int, noteList>::iterator nextIndex;
+	auto nextIndex = songMap.begin();
 
 	// flatten
 	// CARE: when we print, we will only use the FIRST index of songMap[i][INDEX].
@@ -43,7 +43,8 @@ int main(){
 		nextIndex = it;
 		nextIndex++;
 
-		if ((it->first + songMap[it->first][0].duration) > songMap[(it->first)+1][0].start){ // if current start time + current duration > next start time, then overlapping notes and add
+		if (!songMap[it->first].empty() && !songMap[nextIndex->first].empty() &&
+				( (it->first + songMap[it->first][0].duration) > songMap[nextIndex->first][0].start) ){ // if current start time + current duration > next start time, then overlapping notes and add
 
 			switch(songMap.size()){
 				// main comparison logic for n-gram:
@@ -85,24 +86,24 @@ int main(){
 
 	}// end for auto	
 
-/*
+
 	ofstream outfile;
 	outfile.open("./test.txt");
 
 	for (auto it = songMap.begin(); it != songMap.end(); ++it){
-		for (int i = 0; i < songMap[it->first][0].duration; i++){
-			// write to file 
-			// TODO
-			// cat note.VALUE << ' ';
-			outfile << songMap[it->first][0].value << ' ';
-		} // end duration repetition for
+		if (!songMap[it->first].empty()){
 
+			for (int i = 0; i < songMap[it->first][0].duration; i++){
+				// write to file
+				outfile << songMap[it->first][0].value << ' ';
+			
+			} // end duration repetition for
+		}
 	}// end auto for
 
 	outfile.close();
-*/
-	is.close();
 
+	is.close();
 
 	return 0;
 

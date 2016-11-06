@@ -55,11 +55,11 @@ def CalcModel(train = True):
 
 def Compare():
     compVal = CompModels( CalcModel(), CalcModel(train = False), 1 )
-    print(round (compVal * 100, 2), "%")
+    return(round (compVal * 100, 2))
 
 ################################################################
 
-def GenNgram(noteList, gramSize, prevGramCount):
+def GenNgram(noteList, gramSize = 1, prevGramCount = -1):
     freqCount = {}
     if gramSize == 1:
         for i in range(len(noteList)):
@@ -140,25 +140,27 @@ def measureGenerator(noters):
     for k in noters:
         kount += 1
         population['m'+str(rand.randint(1,820))]['note' + str(kount)] = k
-    return population
+    for mes in population:
+        with open('./gToParse/' + mes + '.txt', 'w') as mezure:
+            for note in population[mes]:
+                mezure.write(str(population[mes][note]['start']) + ' ' + str(population[mes][note]['duration']) + ' ' + str(population[mes][note]['pitch']) + ' ' + str(population[mes][note]['velocity']) + '\n')
+
 
 ################################################################
 
 def parser(population):
-    for mes in population:
-        measure = []
-        for note in population[mes]:
-            measure.insert(0,population[mes][note]['start'])
-        measure.sort()
-        yield measure
-
+    print(call('./parseGenetic'))
+    returnString = call('./parseGenetic')
+    returnString = str(returnString)
+    returnString.split(' ')
+    return returnString
 ################################################################
 
 
-def fitness():
-    scores_sorted = sorted(population, population.get('start'))
-    print(scores_sorted)
-    fit = scores_sorted[:42]
+def fitnessTest(inString):
+    GenNgram(inString)
+    fitness = Compare()
+    return fitness
 
 ################################################################
 
@@ -168,7 +170,7 @@ def breedMeasures(fit):
     for parents in itt.combinations(fit, 39):
         for parent in parents:
             notes.insert(parent.values)
-    measureGenerator()
+    return measureGenerator(notes)
 
 ################################################################
 
@@ -180,8 +182,8 @@ def breedTracks(fit, numMes):
 ################################################################
 
 def main():
-    for i in range(5):
-        print(next(parser(measureGenerator(createPopulation((startPopulation(15, 4, 120))[0],(startPopulation(15, 4, 120))[1])))))
+    for i in range(50):
+        (breedMeasures(fitnessTest(next(parser(measureGenerator(createPopulation((startPopulation(15, 4, 120))[0],(startPopulation(15, 4, 120))[1])))))))
 
 if __name__ == main():
     main()

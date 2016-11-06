@@ -21,6 +21,7 @@ typedef vector <Note> noteList;
 
 int main(){
 	ifstream is;
+	string outstring = "";
 
 	for (int fileTag = 1; fileTag <= LAST_FILE_INDEX; fileTag++){
 
@@ -92,7 +93,6 @@ int main(){
 
 		}// end for auto
 
-
 		ofstream outfile;
 		outfile.open("./gParsed/out" + to_string(fileTag) + ".txt");
 
@@ -101,7 +101,7 @@ int main(){
 
 				for (int i = 0; i < songMap[it->first][0].duration; i++){
 					// write to file
-					outfile << songMap[it->first][0].value << ' ';
+					outstring += to_string(songMap[it->first][0].value) + " ";
 
 				} // end duration repetition for
 			}
@@ -113,6 +113,6 @@ int main(){
 
 	}// end looping through all files
 
-	return 0;
+	cout << outstring;
 
 }

@@ -10,7 +10,7 @@ def powerset(iterable):
 
 ################################################################
 
-def startPopulation(seed=None):
+def startPopulation():
     density = int(input('Enter the number of notes per second: '))
     timeSignature = int(input('Enter the number of notes per measure: '))
     tempo = int(input('Enter the tempo that you want: '))
@@ -20,10 +20,13 @@ def startPopulation(seed=None):
     numOfSeconds = numOfMeasures * lengthOfMeasures
     numOfNotes = int(density * numOfSeconds)
 
+def seedPopulation(seed=None):
     if seed == None:
         pass
     else:
         rand.random(seed)
+
+def createPopulation():
     population = {}
     notes = []
     for i in range(numOfNotes):
@@ -33,7 +36,8 @@ def startPopulation(seed=None):
         'pitch' : rand.randint(21,109),
         'velocity' : rand.random()}
         notes.insert(0, note)
-    place = 0
+
+def measureGenerator():
     kount = 0
     for j in range(1,821):
         population['m' + str(j)] = {}
@@ -56,9 +60,11 @@ def fitness():
 
 def breedMeasures(fit):
     population = []
+    notes = []
     for parents in itt.combinations(fit, 39):
-        measure = []
-
+        for parent in parents:
+            notes.insert(parent.values)
+    measureGenerator()
 
 
 ################################################################

@@ -104,10 +104,11 @@ def CreateMidi(averageSong):
 
     roll = random.randrange(1, 100)/100
 
+
     use = 0 
     # chance for each note given rand roll:
     for i in probabilityDict:
-        if abs(roll -  probabilityDict[i]) < .8:
+        if roll > probabilityDict[i]:
             i = i.replace('\n', '')
             use = i
             if use == '':
@@ -143,7 +144,7 @@ def CreateMidi(averageSong):
 
         # chance for each note given rand roll:
         for i in probabilityDict:
-            if abs(roll -  probabilityDict[i]) < .8:
+            if roll > probabilityDict[i]:
                 i = i.replace('\n', '')
                 use = i
                 if use == '':

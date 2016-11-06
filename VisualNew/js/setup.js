@@ -158,14 +158,26 @@ function Note(pitch, startTime, duration, velocity) {
   this.graphic = null;
   // this.noteColor = getRandomColor();
 
-  if (this.velocity < .25) {
-    this.noteColor = "$bfbfbf";
-  } else if (this.velocity < .5) {
-    this.noteColor = "#99cc99";
-  } else if (this.velocity < .75) {
+  if (this.velocity < .1) {
+    this.noteColor = "#99ff99";
+  } else if (this.velocity < .2) {
     this.noteColor = "#80ff80";
+  } else if (this.velocity < .3) {
+    this.noteColor = "#66ff66";
+  } else if (this.velocity < .4) {
+    this.noteColor = "#00ff00";
+  } else if (this.velocity < .5) {
+    this.noteColor = "#00e600";
+  } else if (this.velocity < .6) {
+    this.noteColor = "#00cc00";
+  } else if (this.velocity < .7) {
+    this.noteColor = "#00b300";
+  } else if (this.velocity < .8) {
+    this.noteColor = "#ff0066";
+  } else if (this.velocity < .9) {
+    this.noteColor = "#ff0000";
   } else {
-    this.noteColor = "#66fff6";
+    this.noteColor = "#cc0000";
   }
 
 

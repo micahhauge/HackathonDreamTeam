@@ -12,10 +12,14 @@ if (song) {
     offset = 1.6;
   } else if (song == 2) {
     offset = 2.4;
+  } else if (song == 3) {
+    offset = 2.4;
+  } else if (song == 4) {
+    offset = 2.6;
+  } else {
+    song = 1;
+    offset = 1.6;
   }
-} else {
-  song = 1;
-  offset = 2.1;
 }
 
 
@@ -24,6 +28,7 @@ path = 'midi/' + song + '.mid';
 run(path, offset);
 
 function run (pathToFile = 'midi/7years.mid', offset = 1.6) {
+  console.log('PO:' + path + offset);
   var i, j, k;
   var pathToFile = pathToFile;
   // var pathToFile = 'midi/pirates.mid';
@@ -82,10 +87,10 @@ function run (pathToFile = 'midi/7years.mid', offset = 1.6) {
     console.log(nr.notes);
     MIDIjs.player_callback = display_time;
     function display_time(player_event) {
-      played += 1;
-      if (played < 4) {
+      // played += 1;
+      // if (played < 4) {
        tl.play(player_event.time + offset);
-      }
+      // }
     };
 
 

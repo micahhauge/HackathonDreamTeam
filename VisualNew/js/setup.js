@@ -125,7 +125,6 @@ function KeyGraphic (pitch, p) {
   div.className = "key";
   document.body.appendChild(div);
 
-  // console.log('making keygraphic with pitch' + pitch);
 
   if (isBlack(pitch)) {
     TweenLite.set(div, {
@@ -150,12 +149,29 @@ function KeyGraphic (pitch, p) {
 
 
 // function to create a note object
-function Note(pitch, startTime, duration) {
+function Note(pitch, startTime, duration, velocity) {
   this.pitch = pitch;
   this.startTime = startTime;
   this.duration = duration;
+  this.velocity = velocity;
+  console.log('velocity: ', velocity);
   this.graphic = null;
-  this.noteColor = getRandomColor();
+  // this.noteColor = getRandomColor();
+
+  if (this.velocity < .25) {
+    this.noteColor = "$bfbfbf";
+  } else if (this.velocity < .5) {
+    this.noteColor = "#99cc99";
+  } else if (this.velocity < .75) {
+    this.noteColor = "#80ff80";
+  } else {
+    this.noteColor = "#66fff6";
+  }
+
+
+
+
+
   this.initialX = null;
   this.len = null;
 
@@ -229,11 +245,15 @@ function generateTimeline (notes, keys, p) {
 
     // console.log('keys: ');
     tl.to(keys[notes[i].pitch].graphic, .7, {
-      backgroundColor: '#ccff33',
+      // backgroundColor: '#ccff33',
+      // backgroundColor: '#ff0000',
+      // backgroundColor: '#641478',
+      backgroundColor: '#0ae696', // mint green
     }, notes[i].startTime - .9);
     // console.log(keys[i]);
-    tl.to(keys[notes[i].pitch].graphic, 0, {
+    tl.to(keys[notes[i].pitch].graphic, .05, {
       backgroundColor: '#0099ff',
+      // backgroundColor: '#0ae696', // mint green
     }, notes[i].startTime);
 
 

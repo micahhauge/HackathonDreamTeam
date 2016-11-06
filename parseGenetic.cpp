@@ -9,7 +9,7 @@
 using namespace std;
 
 // last file in training data
-const int LAST_FILE_INDEX = 30; // # of measures in the genetically-generated song
+const int LAST_FILE_INDEX = 41; // # of measures in the genetically-generated song
 
 struct Note{
 	float duration;

@@ -120,7 +120,7 @@ def CreateMidi(averageSong):
             # need to get pitch, time, duration
             # to add to track the following:
             # track, channel, pitch, time, duration, volume
-            pitch = math.floor(use)
+            pitch = math.floor(use*100)
             duration = random.randrange(1, 100) / 100
             volume = math.floor(random.randrange((3*volume/4)*100, (volume*1.5)*100)/100)
             if volume > 100:
@@ -128,6 +128,8 @@ def CreateMidi(averageSong):
             
             mf.addNote(track, channel, pitch, time, duration, volume)
 
+        simulNotes = random.randrange(1, 6)
+    
         # after simulNotes, reroll everything
         roll = random.randrange(1, 100)/100
 

@@ -125,6 +125,7 @@ def CreateMidi(averageSong):
             # need to get pitch, time, duration
             # to add to track the following:
             # track, channel, pitch, time, duration, volume
+            use *= 100
             if use < 21:
                 use = 21
             elif use > 109:

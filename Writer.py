@@ -85,7 +85,7 @@ def CompModels(mod1, mod2, gramSize):
             return 0
 
 def CreateMidi(averageSong):
-    total = TotalNotes(averageSong)/1000
+    total = TotalNotes(averageSong)/100
     mf = MIDIFile(numTracks=1, adjust_origin=True)
     track = 0
 

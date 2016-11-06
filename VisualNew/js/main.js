@@ -16,6 +16,10 @@ if (song) {
     offset = 2.4;
   } else if (song == 4) {
     offset = 2.6;
+  } else if (song == 5) {
+    offset = 2.6;
+  } else if (song == 6) {
+    offset = 1.6;
   } else {
     song = 1;
     offset = 1.6;
@@ -28,7 +32,7 @@ console.log('loading index ' + song);
 
 run(path, offset);
 
-function run (pathToFile = 'midi/7years.mid', offset = 1.6) {
+function run (pathToFile, offset) {
   console.log('PO:' + path + offset);
   var i, j, k;
   var pathToFile = pathToFile;

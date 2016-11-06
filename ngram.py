@@ -20,9 +20,10 @@ def CompSongs(song1, song2):
             #print(int(s))
             song2NoteList.append(s)
     
-    song1Mod = GenNgram(song1Mod,song1NoteList, 1,-1)
-    song2Mod = GenNgram(song2Mod,song2NoteList, 1,-1)
-    compVal = CompModels(song1Mod, song2Mod, 1)
+    song1Mod = GenNgram(song1NoteList, 1,-1)
+    song2Mod = GenNgram(song2NoteList, 1,-1)
+    song3Mod = GenNgram(song1NoteList, 1,song2Mod)
+    compVal = CompModels(song1Mod, song3Mod, 1)
     print(1-compVal)
     #print(song1Mod)
     return (1-compVal);
@@ -31,7 +32,7 @@ def CompSongs(song1, song2):
 
 
 
-def GenNgram(noteGramCount, noteList, gramSize, prevGramCount):
+def GenNgram(noteList, gramSize, prevGramCount):
     freqCount = {}
     if gramSize == 1:
         for i in range(len(noteList)):
@@ -41,6 +42,11 @@ def GenNgram(noteGramCount, noteList, gramSize, prevGramCount):
                 freqCount[noteList[i]] = 1
         if(prevGramCount != -1):
             print("Merge")
+            for i in prevGramCount:
+                if(i in freqCount.keys()):
+                    freqCount[i] = (freqCount[i] + prevGramCount[i])/2
+            #print(i)
+                
         return freqCount;
         
 

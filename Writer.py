@@ -13,7 +13,7 @@ def CalcModel(train = True):
          
     if (train == True):
         # Ngram first song 
-        with open("./" + directory + "/out_0.txt", 'r') as f:
+        with open(directory + "out_0.txt", 'r') as f:
                 for line in f:
                      for s in line.split(' '):
                         songPriorNoteList.append(s)
@@ -23,7 +23,7 @@ def CalcModel(train = True):
         for i in range(file_count-1):  
             i+=1
        
-            with open("./" + directory + "out_"+str(i)+".txt", 'r') as f:
+            with open(directory + "out_"+str(i)+".txt", 'r') as f:
                 for line in f:
                     for s in line.split(' '):
                         songPostNoteList.append(s)
@@ -107,11 +107,12 @@ def CreateMidi(averageSong):
     use = 0 
     # chance for each note given rand roll:
     for i in probabilityDict:
-        if roll > probabilityDict[i]:
+        if abs(roll -  probabilityDict[i]) < .2:
+            i = i.replace('\n', '')
             use = i
             if use == '':
                 use = '0'
-            use = int(use)
+            use = int(float(use))
 
 
 
@@ -142,11 +143,13 @@ def CreateMidi(averageSong):
 
         # chance for each note given rand roll:
         for i in probabilityDict:
-            if roll > probabilityDict[i]:
+            if abs(roll -  probabilityDict[i]) < .2:
+                i = i.replace('\n', '')
                 use = i
                 if use == '':
                     use = '0'
-                use = int(use)
+                use = int(float(use))
+
 
  
         time += duration

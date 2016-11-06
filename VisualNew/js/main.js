@@ -24,6 +24,7 @@ if (song) {
 
 
 path = 'midi/' + song + '.mid';
+console.log('loading index ' + song);
 
 run(path, offset);
 

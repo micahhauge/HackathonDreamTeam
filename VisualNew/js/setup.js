@@ -154,7 +154,6 @@ function Note(pitch, startTime, duration, velocity) {
   this.startTime = startTime;
   this.duration = duration;
   this.velocity = velocity;
-  console.log('velocity: ', velocity);
   this.graphic = null;
   // this.noteColor = getRandomColor();
 
@@ -341,4 +340,17 @@ function isBlack(pitch) {
   } else {
     return false;
   }
+}
+
+function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1];
+        }
+    }
 }

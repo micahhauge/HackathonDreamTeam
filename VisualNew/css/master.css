@@ -11,6 +11,16 @@
   border-width: 1px;
 }
 
+li {
+	list-style-type: decimal;
+  display: list-item;
+  list-style-position: inside;
+}
+
+.pad {
+	margin: 8px;
+}
+
 
 
 body {
@@ -19,11 +29,16 @@ body {
 	margin: 0;
 	padding: 0;
 	overflow:hidden;
+	font-family: "Futura PT", "Futura", sans-serif;
+}
+
+.hi {
+	visibility: hidden;
 }
 
 .note {
-	width: 30px;
-	height: 50px;
+	/*width: 30px;
+	height: 50px;*/
 	/*transform-origin: bottom;*/
 	position: absolute;
 	/*display: none;*/
@@ -33,4 +48,10 @@ body {
 	/*float: left;*/
 	/*margin: 10px;*/
   pointer-events:none;
+	visibility: hidden;
+}
+
+.cont {
+	z-index: 12;
+	position: absolute;
 }

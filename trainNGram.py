@@ -84,9 +84,10 @@ def CompModels(mod1, mod2, gramSize):
     if gramSize == 1:
         for i in mod1:
             if(i in mod2.keys()):
-                matchCount += 1
-                errorTotal += abs(mod2[i] - mod1[i])/(mod2[i] + mod1[i])
-            #print(i)
+               errorTotal += abs(mod2[i] - mod1[i])/(mod2[i] + mod1[i])
+           #print(i)
+            matchCount += 1
+   
         if matchCount > 0:        
             return errorTotal/matchCount;
         else:

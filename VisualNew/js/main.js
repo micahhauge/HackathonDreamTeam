@@ -2,13 +2,13 @@
 // TODO: add more description here later
 
 var i, j, k;
-// var pathToFile = 'midi/7years.mid';
-var pathToFile = 'midi/pirates.mid';
+var pathToFile = 'midi/7years.mid';
+// var pathToFile = 'midi/pirates.mid';
 // var pathToFile = 'midi/JosiahMIDI.mid';
 
 
-// var offset = 1.6;
-var offset = 2.1;
+var offset = 1.6;
+// var offset = 2.1;
 // var offset = 2.4;
 
 // get properties and store in p

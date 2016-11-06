@@ -2,13 +2,13 @@
 // TODO: add more description here later
 
 var i, j, k;
-var pathToFile = 'midi/7years.mid';
-// var pathToFile = 'midi/pirates.mid';
+// var pathToFile = 'midi/7years.mid';
+var pathToFile = 'midi/pirates.mid';
 // var pathToFile = 'midi/JosiahMIDI.mid';
 
 
-var offset = 1.6;
-// var offset = 2.1;
+// var offset = 1.6;
+var offset = 2.1;
 // var offset = 2.4;
 
 // get properties and store in p
@@ -34,7 +34,7 @@ MidiConvert.load(pathToFile, function(midiData) {
     notesData = midiData.tracks[i].notes;
     if (notesData) {
       for (j = 0; j < notesData.length; j++) {
-        nr.notes.push(new Note(notesData[j].midi - 21, notesData[j].time, notesData[j].duration));
+        nr.notes.push(new Note(notesData[j].midi - 21, notesData[j].time, notesData[j].duration, notesData[j].velocity));
         totalDurations += notesData[i].duration;
       }
     }

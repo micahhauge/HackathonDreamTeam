@@ -85,10 +85,10 @@ def CompModels(mod1, mod2, gramSize):
             return 0
 
 def CreateMidi(averageSong):
-    total = TotalNotes(averageSong)/100
+    total = TotalNotes(averageSong)/10
     mf = MIDIFile(numTracks=1, adjust_origin=True)
     track = 0
-
+    use = 0.
     time = 0
     duration = 0.01
     mf.addTrackName(track, time, "main")
@@ -101,21 +101,11 @@ def CreateMidi(averageSong):
     probabilityDict = averageSong
     for i in probabilityDict:
         probabilityDict[i] = averageSong[i]/total
-
-    roll = random.randrange(1, 100)/100
-
-
-    use = 0 
-    # chance for each note given rand roll:
-    for i in probabilityDict:
-        if roll > probabilityDict[i]:
-            i = i.replace('\n', '')
-            use = i
-            if use == '':
-                use = '0'
-            use = int(float(use))
-
-
+        roll = random.randrange(1, 100)/100
+        if (roll < probabilityDict[i] * 2):
+            use = int(float(i))
+    
+    
 
     # random # of notes at timestep
     simulNotes = random.randrange(1, 6)
@@ -125,17 +115,18 @@ def CreateMidi(averageSong):
             # need to get pitch, time, duration
             # to add to track the following:
             # track, channel, pitch, time, duration, volume
-            use *= 100
             if use < 21:
                 use = 21
             elif use > 109:
                 use = 109
-            pitch = math.floor(use)
-            duration = random.randrange(1, 100) / 100
+            pitch = random.randrange(21, 109) 
+
+            # print (pitch, '\n')
+            
+            duration = random.randrange(7, 50)/10
             volume = math.floor(random.randrange((3*volume/4)*100, (volume*1.5)*100)/100)
             if volume > 100:
                 volume = 100
-            
             mf.addNote(track, channel, pitch, time, duration, volume)
 
         simulNotes = random.randrange(1, 6)
@@ -145,12 +136,10 @@ def CreateMidi(averageSong):
 
         # chance for each note given rand roll:
         for i in probabilityDict:
-            if roll > probabilityDict[i]:
-                i = i.replace('\n', '')
-                use = i
-                if use == '':
-                    use = '0'
-                use = int(float(use))
+            probabilityDict[i] = averageSong[i]/total
+            roll = random.randrange(1, 100)/100
+            if (roll < probabilityDict[i] * 2):
+                use = int(float(i))
 
 
  

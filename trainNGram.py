@@ -56,7 +56,7 @@ def CalcModel(train = True):
 
 def Compare():
     compVal = CompModels( CalcModel(), CalcModel(train = False), 1 )
-    print(compVal * 100, "%")
+    print(round (compVal * 100, 2), "%")
 
 
 def GenNgram(noteList, gramSize, prevGramCount):

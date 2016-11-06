@@ -90,6 +90,7 @@ def CreateMidi(averageSong):
     track = 0
 
     time = 0
+    duration = 0.01
     mf.addTrackName(track, time, "main")
     mf.addTempo(track, time, 120)
 
@@ -103,12 +104,14 @@ def CreateMidi(averageSong):
 
     roll = random.randrange(1, 100)/100
 
-    use = 0. 
+    use = 0 
     # chance for each note given rand roll:
     for i in probabilityDict:
         if roll > probabilityDict[i]:
-            use = probabilityDict[i]
-
+            use = i
+            if use == '':
+                use = '0'
+            use = int(use)
 
 
 
@@ -120,7 +123,11 @@ def CreateMidi(averageSong):
             # need to get pitch, time, duration
             # to add to track the following:
             # track, channel, pitch, time, duration, volume
-            pitch = math.floor(use*100)
+            if use < 21:
+                use = 21
+            elif use > 109:
+                use = 109
+            pitch = math.floor(use)
             duration = random.randrange(1, 100) / 100
             volume = math.floor(random.randrange((3*volume/4)*100, (volume*1.5)*100)/100)
             if volume > 100:
@@ -136,8 +143,12 @@ def CreateMidi(averageSong):
         # chance for each note given rand roll:
         for i in probabilityDict:
             if roll > probabilityDict[i]:
-                use = probabilityDict[i]
+                use = i
+                if use == '':
+                    use = '0'
+                use = int(use)
 
+ 
         time += duration
 
     # finally, write file

@@ -21,9 +21,12 @@ if (song) {
   } else if (song == 6) {
     offset = 1.6;
   } else {
-    song = 1;
+    song = 6;
     offset = 1.6;
   }
+} else {
+  song = 6;
+  offset = 1.6;
 }
 
 
